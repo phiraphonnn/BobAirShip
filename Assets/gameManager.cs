@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class gameManager : MonoBehaviour
 {
     public float Acceleration;
@@ -9,9 +10,11 @@ public class gameManager : MonoBehaviour
     public float Force;
     public float speed;
     
-    public float distanceTraveled = 0f; 
-    
+    public float distanceTraveled = 0f;
+    public float distanceToTravel;
     public static gameManager current;
+    
+    [SerializeField] public TMP_Text DistanceText;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         caculateDistand();
+        DistanceTextUpdate();
         
         if (speed != FinalSpeed)
         {
@@ -33,9 +37,6 @@ public class gameManager : MonoBehaviour
             }
                      
         }
-        
-        
-        
     }
 
     public void caculateDistand()
@@ -52,6 +53,13 @@ public class gameManager : MonoBehaviour
         Acceleration = Force;
         FinalSpeed = Acceleration;
         
+    }
+    
+    public void DistanceTextUpdate()
+    {
+        string formatteddistanceTraveled = distanceTraveled.ToString("0.00");
+        DistanceText.text = "" + formatteddistanceTraveled + " km / " + distanceToTravel + " km";
+     
     }
     /*
     public void stopAirShip()
