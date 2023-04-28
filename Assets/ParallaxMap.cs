@@ -23,7 +23,7 @@ public class ParallaxMap : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    public  void Update()
     {
         // Adjust the local scale of the transform based on the camera's orthographic size
       //  float scale = cam.orthographicSize * scaleFactor;
@@ -33,7 +33,7 @@ public class ParallaxMap : MonoBehaviour
         spriteRenderer.size = new Vector2(spriteRenderer.size.x, spriteRenderer.size.y) / transform.localScale.x;
 
 
-            speed = gameManager.current.speed * 0.5f;
+            speed = gameManager.current.speed * 0.2f;
 
             transform.position += Vector3.left * speed * Time.deltaTime * (1 - parrallexEffect);
 
