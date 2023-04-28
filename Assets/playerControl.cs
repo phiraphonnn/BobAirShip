@@ -1,16 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
-public class playerCon : MonoBehaviour
+public class playerControl : MonoBehaviour
 {
     //player hp
     public int hpPlayer;
     public int hpPlayerMax;
     
     //playerBUllet
+    private int selectedBullet;
+
+    [SerializeField] private GameObject playerGun;
+    [SerializeField] private GameObject target;
+    
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject harpoon;
     
     
     //player move
@@ -26,7 +35,17 @@ public class playerCon : MonoBehaviour
 
    public void Update()
     {
-     playerMove();  
+     playerMove();
+
+     target.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,10f));
+     Vector2 direction = target.transform.position - playerGun.transform.position;
+     playerGun.transform.right = direction;
+     
+     if (Input.GetMouseButtonDown(0))
+     {
+         AimAndFire();
+     }
+    
     }
 
     public void playerMove()
@@ -63,4 +82,21 @@ public class playerCon : MonoBehaviour
     {
         
     }
+
+    #region GunPlay
+
+    private void  AimAndFire()
+    {
+        //เว้นไว้ เปลี่ยนปืน
+        
+        //ยิง
+        LaunchProjectile(bullet);
+    }
+
+    private void LaunchProjectile(GameObject projectile)
+    {
+        Instantiate(projectile);
+    }
+
+    #endregion
 }

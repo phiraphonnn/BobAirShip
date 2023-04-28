@@ -14,7 +14,7 @@ public class gameManager : MonoBehaviour
     public float distanceToTravel;
     public static gameManager current;
 
-    [SerializeField] public playerCon Player;
+    [SerializeField] public playerControl Player;
     [SerializeField] public TMP_Text DistanceText;
     [SerializeField] public TMP_Text PlayerHpText;
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class gameManager : MonoBehaviour
         
         // 3600 คือ วินาทีทั้้งหมดของ ชม จะแปลงเป็น 60 ก็ได้ จะ เวลาในเกมก็จะเท่ากับ 1 ชม = 60 วิ 
         distanceTraveled += distanceThisFrame;
-        Debug.Log("Distance traveled: " + distanceTraveled + " km");
+        //Debug.Log("Distance traveled: " + distanceTraveled + " km");
     }
     public void Normal()
     {
