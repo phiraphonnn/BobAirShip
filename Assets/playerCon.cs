@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,25 @@ using UnityEngine.UI;
 
 public class playerCon : MonoBehaviour
 {
+    //player hp
+    public int hpPlayer;
+    public int hpPlayerMax;
+    
+    //playerBUllet
+    
+    
+    //player move
     public float speed = 3.0f;
     public float sliderSpeed = 0.1f;
     public Slider slider;
-    
-    void Update()
+
+
+    public void Start()
+    {
+        hpPlayer = hpPlayerMax;
+    }
+
+   public void Update()
     {
      playerMove();  
     }
@@ -42,5 +57,10 @@ public class playerCon : MonoBehaviour
         {
             transform.position -= Vector3.up * speed * Time.deltaTime;
         }
+    }
+
+    public void calulateHp()
+    {
+        
     }
 }

@@ -13,8 +13,10 @@ public class gameManager : MonoBehaviour
     public float distanceTraveled = 0f;
     public float distanceToTravel;
     public static gameManager current;
-    
+
+    [SerializeField] public playerCon Player;
     [SerializeField] public TMP_Text DistanceText;
+    [SerializeField] public TMP_Text PlayerHpText;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         caculateDistand();
-        DistanceTextUpdate();
+        TextUpdate();
         
         if (speed != FinalSpeed)
         {
@@ -55,11 +57,13 @@ public class gameManager : MonoBehaviour
         
     }
     
-    public void DistanceTextUpdate()
+    public void TextUpdate()
     {
         string formatteddistanceTraveled = distanceTraveled.ToString("0.00");
         DistanceText.text = "" + formatteddistanceTraveled + " km / " + distanceToTravel + " km";
-     
+
+        PlayerHpText.text = "" + Player.hpPlayer;
+
     }
     /*
     public void stopAirShip()
