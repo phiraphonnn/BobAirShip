@@ -78,9 +78,29 @@ public class playerControl : MonoBehaviour
         }
     }
 
-    public void calulateHp()
+    public  void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Bullet")) //ต้องเปลี่ยนเป็น EnemyBullet or Enemy 
+        {
+            BulletBehavior bullet = collision.GetComponent<BulletBehavior>();
+            HitFlashEff flashEff = gameObject.GetComponent<HitFlashEff>();
+            flashEff.Flash();
+            hpPlayer -= bullet.damage;
+            Debug.Log("Enemy hit by bullet for " + bullet.damage + " damage. HP: " + hpPlayer);
+
+            if (hpPlayer <= 0)
+            {
+                Die();
+            }
+
+            Destroy(collision.gameObject);
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("player died.");
+        Destroy(gameObject);
     }
 
     #region GunPlay
