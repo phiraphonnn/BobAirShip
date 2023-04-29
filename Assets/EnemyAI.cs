@@ -6,6 +6,7 @@ public class EnemyAI : MonoBehaviour
     public int hpEnemy;
     public int hpEnemyMax;
     
+    public WaveManager waveManager;
     //moveAi
     public float speed;
 
@@ -13,14 +14,16 @@ public class EnemyAI : MonoBehaviour
 
     private float retreatDistance;
 
+    private float randompingpong;
+    
     public float cooldownTime;
     
     public Transform player;
     // Start is called before the first frame update
     void Start()
     {
-        
-     
+        waveManager = FindObjectOfType<WaveManager>();
+        randompingpong = Random.Range(3, 8);
         retreatDistance = stoppingDistance - 1;
         hpEnemy = hpEnemyMax;
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -46,7 +49,7 @@ public class EnemyAI : MonoBehaviour
        {
            transform.position = Vector2.MoveTowards(transform.position, targetPosition, -speed * Time.deltaTime);
        }
-       transform.position = new Vector2(transform.position.x, Mathf.PingPong(Time.time, 4f) - 1f);
+       transform.position = new Vector2(transform.position.x, Mathf.PingPong(Time.time, randompingpong) - 1f);
    }
    
    
@@ -72,6 +75,7 @@ public class EnemyAI : MonoBehaviour
    void Die()
    {
        Debug.Log("Enemy died.");
+       waveManager.EnemyDefeated();
        Destroy(gameObject);
    }
    

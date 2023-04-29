@@ -80,7 +80,7 @@ public class playerControl : MonoBehaviour
 
     public  void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet")) //ต้องเปลี่ยนเป็น EnemyBullet or Enemy 
+        if (collision.CompareTag("EnemyBullet")) //ต้องเปลี่ยนเป็น EnemyBullet or Enemy 
         {
             BulletBehavior bullet = collision.GetComponent<BulletBehavior>();
             HitFlashEff flashEff = gameObject.GetComponent<HitFlashEff>();
@@ -113,9 +113,23 @@ public class playerControl : MonoBehaviour
         LaunchProjectile(bullet);
     }
 
+    // ทำมาก่อนอยากลองยิงได้
     private void LaunchProjectile(GameObject projectile)
     {
-        Instantiate(projectile);
+        GameObject newProjectile = Instantiate(projectile, playerGun.transform.position, Quaternion.identity);
+    
+        // Get the mouse position in world coordinates
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f; // Set the z-coordinate to 0 to ensure the projectile spawns at the same depth as the player
+    
+        // Rotate the projectile to face the mouse position
+        Vector2 direction = mousePosition - newProjectile.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        newProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    
+        // Add force to the projectile to shoot it towards the mouse position
+        Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
+        rb.AddForce(direction.normalized * 500f);
     }
 
     #endregion

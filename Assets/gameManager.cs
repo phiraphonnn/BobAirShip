@@ -17,10 +17,14 @@ public class gameManager : MonoBehaviour
     [SerializeField] public playerControl Player;
     [SerializeField] public TMP_Text DistanceText;
     [SerializeField] public TMP_Text PlayerHpText;
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
         current = this;
+
     }
 
     // Update is called once per frame
@@ -65,9 +69,7 @@ public class gameManager : MonoBehaviour
         PlayerHpText.text = "" + Player.hpPlayer;
 
     }
-    /*
-    public void stopAirShip()
-    {
-        FinalSpeed = 0;
-    }*/
+    
+    
+    
 }
