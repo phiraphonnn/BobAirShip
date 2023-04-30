@@ -129,7 +129,23 @@ public class playerControl : MonoBehaviour
     
         // Add force to the projectile to shoot it towards the mouse position
         Rigidbody2D rb = newProjectile.GetComponent<Rigidbody2D>();
-        rb.AddForce(direction.normalized * 500f);
+        rb.velocity = CaculateProjectVelocity(playerGun.transform.position, target.transform.position, 1f);
+        
+    }
+
+    private Vector2 CaculateProjectVelocity(Vector2 origin,Vector2 target,float time)
+    {
+        Vector2 distanc = target = target - origin;
+
+        float disX = distanc.x;
+        float disY = distanc.y;
+
+        float velocityX = disX / time;
+        float velocityY = disY / time + 0.5f * Mathf.Abs(Physics2D.gravity.y) * time;
+
+        Vector2 result = new Vector2(velocityX, velocityY);
+        
+        return result;
     }
 
     #endregion
