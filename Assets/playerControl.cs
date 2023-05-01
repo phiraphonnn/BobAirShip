@@ -116,9 +116,9 @@ public class playerControl : MonoBehaviour
 
     public  void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy")) //ต้องเปลี่ยนเป็น EnemyBullet or Enemy 
+        if (collision.CompareTag("EnemyBullet")) //ต้องเปลี่ยนเป็น EnemyBullet or Enemy 
         {
-            BulletBehavior bullet = collision.GetComponent<BulletBehavior>();
+            EnemyBulletBehavior bullet = collision.GetComponent<EnemyBulletBehavior>();
             HitFlashEff flashEff = gameObject.GetComponent<HitFlashEff>();
             flashEff.Flash();
             hpPlayer -= bullet.damage;
@@ -237,6 +237,8 @@ public class playerControl : MonoBehaviour
     }
     
 
+    
+    
     private Vector2 CaculateProjectVelocity(Vector2 origin,Vector2 target,float time)
     {
         Vector2 distanc = target = target - origin;
