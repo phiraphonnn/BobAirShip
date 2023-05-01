@@ -232,7 +232,7 @@ public class playerControl : MonoBehaviour
         
         if (projectile == harpoon)
         {
-           rb.AddForce(direction*250,ForceMode2D.Force);
+           rb.AddForce(direction*400,ForceMode2D.Force);
            cooldownText.text = "10";
         }
         
