@@ -10,7 +10,7 @@ public class gameManager : MonoBehaviour
     public float Force;
     public float speed;
     
-    public float distanceTraveled = 0f;
+    public float distanceTraveled;
     public float distanceToTravel;
     public static gameManager current;
 
@@ -52,30 +52,32 @@ public class gameManager : MonoBehaviour
 
     public void caculateDistand()
     {
-        float distanceThisFrame = speed / 3600f * Time.deltaTime; 
-        
-        // 3600 คือ วินาทีทั้้งหมดของ ชม จะแปลงเป็น 60 ก็ได้ จะ เวลาในเกมก็จะเท่ากับ 1 ชม = 60 วิ 
-        distanceTraveled += distanceThisFrame;
-        //Debug.Log("Distance traveled: " + distanceTraveled + " km");
+        float increaseRate = 1.66f; // (ระยะ100/เวลา60)*ในเวลา1
+        distanceTraveled += increaseRate * Time.deltaTime;
+
     }
 
     public void caculateDistandtoScore()
     {
-        scorePoint += distanceTraveled * 2 * 0.5f;
-
+        if (distanceTraveled % 5 == 0)
+        {
+            scorePoint += 100;
+        }
+        
+        
     }
     
     public void Normal()
     {
         Acceleration = Force;
         FinalSpeed = Acceleration;
-        
     }
     
     public void TextUpdate()
     {
-        string formatteddistanceTraveled = distanceTraveled.ToString("0.00");
-        DistanceText.text = "" + formatteddistanceTraveled + " km / " + distanceToTravel + " km";
+        float disntaceleft = distanceToTravel - distanceTraveled;
+        string formatteddistanceTraveled = disntaceleft.ToString("0");
+        DistanceText.text = "" + formatteddistanceTraveled + " km";
 
         PlayerHpText.text = "" + Player.hpPlayer;
         ScoreText.text = scorePoint.ToString("0");
