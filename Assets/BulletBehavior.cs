@@ -11,6 +11,11 @@ public class BulletBehavior : MonoBehaviour
     public int damage;
 
     
+    
+    public float rotationSpeed = 100f;
+
+    
+    
     public float timetoDestroy;
     // Start is called before the first frame update
     public void OnTriggerEnter2D(Collider2D collision)
@@ -41,10 +46,17 @@ public class BulletBehavior : MonoBehaviour
         {
             Invoke("DestroyObject", timetoDestroy);
         }
-       
         
     }
-    
+
+    private void Update()
+    {
+        if (isBlackhole)
+        {
+            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+        }
+    }
+
     void DestroyObject()
     {
         Destroy(gameObject);

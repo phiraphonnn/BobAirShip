@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 public class WaveManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject enemyPrefab1;
+   // public GameObject enemyPrefab2;
     public int enemiesPerWave = 3;
     public float timeBetweenWaves = 10f;
     public Transform spawnPosition;
@@ -44,7 +46,16 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < enemiesPerWave; i++)
         {
             Vector3 randomPosition = spawnPosition.position + new Vector3(Random.Range(-5,5), Random.Range(-5,5), 0f);
-            Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            int randomEnemyIndex = Random.Range(0, 2);
+
+            if (randomEnemyIndex == 0)
+            {
+                Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(enemyPrefab1, randomPosition, Quaternion.identity);
+            }
         }
     }
 
