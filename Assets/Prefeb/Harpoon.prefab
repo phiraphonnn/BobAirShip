@@ -171,5 +171,6 @@ MonoBehaviour:
   isBlackhole: 0
   isBulletBlackhole: 0
   blackHolePrefab: {fileID: 5426103466425128887, guid: 4d8346290fb01684ab78f4325b2361ba, type: 3}
-  damage: 80
+  damage: 10
+  rotationSpeed: 100
   timetoDestroy: 10

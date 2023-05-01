@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class HarpoonBehavior : BulletBehavior
 {
-    
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
+        Invoke("DestroyObject", timetoDestroy);
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -16,10 +15,10 @@ public class HarpoonBehavior : BulletBehavior
         if (collision.CompareTag("Enemy"))
         {
             Debug.Log("harboon");
-            
-            
         }
         
-        
     }
+    
+    
+    
 }

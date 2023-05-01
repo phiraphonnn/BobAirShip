@@ -23,6 +23,8 @@ public class playerControl : MonoBehaviour
     [SerializeField] private TMP_Text cooldownText;
     public float cooldownTime = 10f;
     private float cooldownTimer = 0;
+    
+    [SerializeField] private TMP_Text cooldownText2;
 
     [SerializeField] private GameObject target;
     
