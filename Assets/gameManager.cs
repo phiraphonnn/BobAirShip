@@ -33,6 +33,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Normal();
         caculateDistand();
         TextUpdate();
         caculateDistandtoScore();
@@ -66,7 +67,6 @@ public class gameManager : MonoBehaviour
     
     public void Normal()
     {
-        Debug.Log("start");
         Acceleration = Force;
         FinalSpeed = Acceleration;
         

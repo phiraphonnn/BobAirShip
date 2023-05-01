@@ -13,7 +13,10 @@ public class BulletBehavior : MonoBehaviour
             Destroy(gameObject);
         }
         
-        
+    }
+    
+    void OnBecameInvisible() {
+            Destroy(gameObject);
     }
     
 
