@@ -30,7 +30,8 @@ public class Winds : MonoBehaviour
         // Apply a random rotation around the z-axis
       
     }
-    void OnBecameInvisible() {
+    void OnBecameInvisible() 
+    {
         Destroy(gameObject);
     }
     

@@ -84,7 +84,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba90b30bb2accfb4b93a9f58ed1519a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlackhole: 0
+  isBulletBlackhole: 0
+  blackHolePrefab: {fileID: 5426103466425128887, guid: 4d8346290fb01684ab78f4325b2361ba, type: 3}
   damage: 20
+  timetoDestroy: 5
 --- !u!1 &486388044532795571
 GameObject:
   m_ObjectHideFlags: 0

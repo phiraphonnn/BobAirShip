@@ -152,7 +152,7 @@ public class playerControl : MonoBehaviour
             return BlackHolebullet;
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             return harpoon;
         }
