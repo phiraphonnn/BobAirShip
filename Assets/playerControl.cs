@@ -27,6 +27,7 @@ public class playerControl : MonoBehaviour
     [SerializeField] private GameObject target;
     
     [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject BlackHolebullet;
     [SerializeField] private GameObject harpoon;
     
     [Header("Movement setting")]
@@ -61,6 +62,11 @@ public class playerControl : MonoBehaviour
      if (Input.GetMouseButtonDown(0))
      {
          if (selectedGun == harpoon && cooldownTimer <= 0)
+         {
+             cooldownTimer = cooldownTime;
+             LaunchProjectile(selectedGun);
+         }
+         if (selectedGun == BlackHolebullet && cooldownTimer <= 0)
          {
              cooldownTimer = cooldownTime;
              LaunchProjectile(selectedGun);
@@ -141,6 +147,10 @@ public class playerControl : MonoBehaviour
         {
             return bullet;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            return BlackHolebullet;
+        }
 
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -158,6 +168,12 @@ public class playerControl : MonoBehaviour
         {
             gunSelected = playerGun1.transform;
         }
+        if (SelectedGun == BlackHolebullet)
+        {
+            gunSelected = playerGun1.transform;
+        }
+        
+        
         else if (SelectedGun == harpoon)
         {
             gunSelected = playerGun2.transform;
@@ -174,6 +190,10 @@ public class playerControl : MonoBehaviour
     {
         Transform gunSelected = null;
         if (projectile == bullet)
+        {
+            gunSelected = playerGun1.transform;
+        }
+        if (projectile == BlackHolebullet)
         {
             gunSelected = playerGun1.transform;
         }
@@ -201,6 +221,12 @@ public class playerControl : MonoBehaviour
         {
             rb.velocity = CaculateProjectVelocity(gunSelected.position, target.transform.position, 1f);
         }
+        
+        if (projectile == BlackHolebullet)
+        {
+            rb.velocity = CaculateProjectVelocity(gunSelected.position, target.transform.position, 1f);
+        }
+
         
         if (projectile == harpoon)
         {
