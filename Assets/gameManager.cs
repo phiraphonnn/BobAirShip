@@ -14,9 +14,12 @@ public class gameManager : MonoBehaviour
     public float distanceToTravel;
     public static gameManager current;
 
+    public float scorePoint;
+    
     [SerializeField] public playerControl Player;
     [SerializeField] public TMP_Text DistanceText;
     [SerializeField] public TMP_Text PlayerHpText;
+    [SerializeField] public TMP_Text ScoreText;
     
     
     
@@ -24,7 +27,7 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         current = this;
-
+        scorePoint = 0;
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class gameManager : MonoBehaviour
     {
         caculateDistand();
         TextUpdate();
+        caculateDistandtoScore();
         
         if (speed != FinalSpeed)
         {
@@ -53,6 +57,13 @@ public class gameManager : MonoBehaviour
         distanceTraveled += distanceThisFrame;
         //Debug.Log("Distance traveled: " + distanceTraveled + " km");
     }
+
+    public void caculateDistandtoScore()
+    {
+        scorePoint += distanceTraveled * 2 * 0.5f;
+
+    }
+    
     public void Normal()
     {
         Debug.Log("start");
@@ -67,8 +78,10 @@ public class gameManager : MonoBehaviour
         DistanceText.text = "" + formatteddistanceTraveled + " km / " + distanceToTravel + " km";
 
         PlayerHpText.text = "" + Player.hpPlayer;
+        ScoreText.text = scorePoint.ToString("0");
 
     }
+    
     
     
     

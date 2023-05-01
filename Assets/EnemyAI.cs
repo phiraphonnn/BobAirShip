@@ -17,6 +17,8 @@ public class EnemyAI : MonoBehaviour
     private float randompingpong;
     
     public float cooldownTime;
+
+    public float  Score;
     
     public Transform player;
     // Start is called before the first frame update
@@ -74,6 +76,7 @@ public class EnemyAI : MonoBehaviour
 
    void Die()
    {
+       gameManager.current.scorePoint += Score;
        Debug.Log("Enemy died.");
        waveManager.EnemyDefeated();
        Destroy(gameObject);
