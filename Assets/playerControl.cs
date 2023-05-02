@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Slider = UnityEngine.UI.Slider;
+using UnityEngine.SceneManagement;
 
 public class playerControl : MonoBehaviour
 {
@@ -79,8 +80,12 @@ public class playerControl : MonoBehaviour
              LaunchProjectile(selectedGun);
          }
          
+         
      }
-    
+     if(Input.GetKey(KeyCode.Escape))
+     {
+         SceneManager.LoadScene(0);
+     } 
     }
 
    
