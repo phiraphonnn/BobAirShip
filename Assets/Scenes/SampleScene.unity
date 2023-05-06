@@ -1724,7 +1724,7 @@ MonoBehaviour:
   DistanceText: {fileID: 861054545}
   PlayerHpText: {fileID: 1969064737}
   ScoreText: {fileID: 794166870}
-  VictoryText: {fileID: 0}
+  VictoryText: {fileID: 1587311303}
 --- !u!114 &1317168202
 MonoBehaviour:
   m_ObjectHideFlags: 0
