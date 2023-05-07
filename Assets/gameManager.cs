@@ -24,7 +24,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] public TMP_Text ScoreText;
     
     [SerializeField] public TMP_Text VictoryText;
-    
+
+    public float highScore;
+    public TMP_Text highscoreText;
     
     // Start is called before the first frame update
     void Start()
@@ -32,16 +34,23 @@ public class gameManager : MonoBehaviour
         current = this;
         scorePoint = 0;
         Victory(false);
+
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
         Normal();
-        caculateDistand();
+
+        if (Victory(false) == false)
+        {
+            caculateDistand();
+        }
+
         TextUpdate();
         caculateDistandtoScore();
-        
+
         if (speed != FinalSpeed)
         {
                 
@@ -72,7 +81,12 @@ public class gameManager : MonoBehaviour
 
     public void caculateDistandtoScore()
     {
-        if  (Mathf.Abs(distanceTraveled % 5) < 0.001f)
+        if (distanceTraveled >= 100)
+        {
+            distanceTraveled = 100;
+        }
+        
+        if  (Mathf.Abs(distanceTraveled % 5) < 0.001f && Mathf.Abs(distanceTraveled % 5) > 0)
         {
             scorePoint += 100;
         }
@@ -95,20 +109,29 @@ public class gameManager : MonoBehaviour
         PlayerHpText.text = "" + Player.hpPlayer;
         ScoreText.text = scorePoint.ToString("0");
 
-        if (Mathf.Abs(disntaceleft) < 0.001f)
+        if (Mathf.Abs(distanceTraveled) >= 100)
         {
             Victory(true);
         }
     }
 
-    public void Victory(bool check)
+    public bool Victory(bool check)
     {
         if (check == true)
         {
             VictoryText.gameObject.SetActive(check);
             Time.timeScale = 0f;
+
+            return true;
+
+            if (scorePoint > highScore)
+            {
+                highScore = scorePoint;
+                highscoreText.text = "HIGH SCORE : " + highScore;
+            }
         }
         
+        return false;
     }
 
     public void Victory(bool check, string text)
