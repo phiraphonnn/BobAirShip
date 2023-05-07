@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] public TMP_Text PlayerHpText;
     [SerializeField] public TMP_Text ScoreText;
     
+    [SerializeField] public TMP_Text VictoryText;
     
     
     // Start is called before the first frame update
@@ -29,6 +31,7 @@ public class gameManager : MonoBehaviour
     {
         current = this;
         scorePoint = 0;
+        Victory(false);
     }
 
     // Update is called once per frame
@@ -48,19 +51,28 @@ public class gameManager : MonoBehaviour
                 speed = FinalSpeed;
             }
         }
+
+        if (Player == null)
+        {
+            Victory(true,"LOSER");
+        }
         
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        } 
     }
 
     public void caculateDistand()
     {
-        float increaseRate = 1.66f; // (ระยะ100/เวลา60)*ในเวลา1
+        float increaseRate = 1.66f;
         distanceTraveled += increaseRate * Time.deltaTime;
 
     }
 
     public void caculateDistandtoScore()
     {
-        if (distanceTraveled % 5 == 0)
+        if  (Mathf.Abs(distanceTraveled % 5) < 0.001f)
         {
             scorePoint += 100;
         }
@@ -83,9 +95,31 @@ public class gameManager : MonoBehaviour
         PlayerHpText.text = "" + Player.hpPlayer;
         ScoreText.text = scorePoint.ToString("0");
 
+        if (Mathf.Abs(disntaceleft) < 0.001f)
+        {
+            Victory(true);
+        }
     }
-    
-    
+
+    public void Victory(bool check)
+    {
+        if (check == true)
+        {
+            VictoryText.gameObject.SetActive(check);
+            Time.timeScale = 0f;
+        }
+        
+    }
+
+    public void Victory(bool check, string text)
+    {
+        if (check == true)
+        {
+            VictoryText.text = text;
+            VictoryText.gameObject.SetActive(check);
+        }
+        
+    }
     
     
 }
