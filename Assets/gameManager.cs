@@ -16,7 +16,7 @@ public class gameManager : MonoBehaviour
     public float distanceToTravel;
     public static gameManager current;
 
-    public float scorePoint;
+    public int scorePoint;
     
     [SerializeField] public playerControl Player;
     [SerializeField] public TMP_Text DistanceText;
@@ -25,8 +25,10 @@ public class gameManager : MonoBehaviour
     
     [SerializeField] public TMP_Text VictoryText;
 
-    public float highScore;
+    public int highScore;
     public TMP_Text highscoreText;
+    
+    private float lastScorePoint = 0f;
     
     // Start is called before the first frame update
     void Start()
@@ -49,7 +51,7 @@ public class gameManager : MonoBehaviour
         }
 
         TextUpdate();
-        caculateDistandtoScore();
+        
 
         if (speed != FinalSpeed)
         {
@@ -76,20 +78,20 @@ public class gameManager : MonoBehaviour
     {
         float increaseRate = 1.66f;
         distanceTraveled += increaseRate * Time.deltaTime;
-
+        
+        caculateDistandtoScore();
+        
+        
     }
 
     public void caculateDistandtoScore()
     {
-        if (distanceTraveled >= 100)
-        {
-            distanceTraveled = 100;
-        }
-        
-        if  (Mathf.Abs(distanceTraveled % 5) < 0.001f && Mathf.Abs(distanceTraveled % 5) > 0)
+        if (distanceTraveled >= lastScorePoint + 5)
         {
             scorePoint += 100;
+            lastScorePoint += 5;
         }
+        
         
         
     }
@@ -122,16 +124,19 @@ public class gameManager : MonoBehaviour
             VictoryText.gameObject.SetActive(check);
             Time.timeScale = 0f;
 
-            return true;
-
             if (scorePoint > highScore)
             {
                 highScore = scorePoint;
                 highscoreText.text = "HIGH SCORE : " + highScore;
             }
+            
+            return true;
         }
-        
-        return false;
+
+        else
+        {
+            return false;
+        }
     }
 
     public void Victory(bool check, string text)

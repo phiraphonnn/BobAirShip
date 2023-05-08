@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     private float randompingpong;
     
 
-    public float  Score;
+    public int  Score;
 
     public GameObject EnemyBullet;
     
