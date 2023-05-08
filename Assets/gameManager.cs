@@ -16,6 +16,9 @@ public class gameManager : MonoBehaviour
     public float distanceToTravel;
     public static gameManager current;
 
+    public Menu menu;
+    
+
     public int scorePoint;
     
     [SerializeField] public playerControl Player;
@@ -30,6 +33,8 @@ public class gameManager : MonoBehaviour
     
     private float lastScorePoint = 0f;
     
+    private string highScoreKey = "HighScore";
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +43,9 @@ public class gameManager : MonoBehaviour
         Victory(false);
 
         Time.timeScale = 1;
+        
+        highScore = PlayerPrefs.GetInt(highScoreKey, 0);
+        highscoreText.text = "HIGH SCORE : " + highScore;
     }
 
     // Update is called once per frame
@@ -70,6 +78,7 @@ public class gameManager : MonoBehaviour
         
         if(Input.GetKey(KeyCode.Escape))
         {
+            //menu.highscore = highScore;
             SceneManager.LoadScene(0);
         } 
     }
@@ -127,7 +136,10 @@ public class gameManager : MonoBehaviour
             if (scorePoint > highScore)
             {
                 highScore = scorePoint;
+                PlayerPrefs.SetInt(highScoreKey, highScore);
+                PlayerPrefs.Save();
                 highscoreText.text = "HIGH SCORE : " + highScore;
+                
             }
             
             return true;
@@ -145,6 +157,15 @@ public class gameManager : MonoBehaviour
         {
             VictoryText.text = text;
             VictoryText.gameObject.SetActive(check);
+            
+            if (scorePoint > highScore)
+            {
+                highScore = scorePoint;
+                PlayerPrefs.SetInt(highScoreKey, highScore);
+                PlayerPrefs.Save();
+                highscoreText.text = "HIGH SCORE : " + highScore;
+                
+            }
         }
         
     }
